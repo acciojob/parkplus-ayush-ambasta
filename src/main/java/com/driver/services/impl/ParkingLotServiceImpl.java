@@ -31,11 +31,8 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
     @Override
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
-        Optional<ParkingLot> optionalParkingLot = parkingLotRepository1.findById(parkingLotId);
-        if(optionalParkingLot.isEmpty()){
-            return null;
-        }
-        ParkingLot parkingLot = optionalParkingLot.get();
+        ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).orElse(null);
+
         Spot newSpot = new Spot();
         if(numberOfWheels<=2){
             newSpot.setSpotType(SpotType.TWO_WHEELER);
