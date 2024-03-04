@@ -31,6 +31,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     @Override
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
 
+
         Spot spot = new Spot();
 
         if (numberOfWheels <= 2) {
