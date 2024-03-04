@@ -33,7 +33,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
         Optional<ParkingLot> optionalParkingLot = parkingLotRepository1.findById(parkingLotId);
         if(optionalParkingLot.isEmpty()){
-            throw new RuntimeException("Invalid parkingLotId");
+            return null;
         }
         ParkingLot parkingLot = optionalParkingLot.get();
         Spot newSpot = new Spot();
