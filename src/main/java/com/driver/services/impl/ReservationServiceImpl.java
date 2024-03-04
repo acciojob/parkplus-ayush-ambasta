@@ -27,12 +27,12 @@ public class ReservationServiceImpl implements ReservationService {
         Optional<User> optionalUser = userRepository3.findById(userId);
         Optional<ParkingLot> optionalParkingLot = parkingLotRepository3.findById(parkingLotId);
         if(optionalUser.isEmpty() || optionalParkingLot.isEmpty()){
-            return null;
+            throw new Exception("Cannot make reservation");
         }
         User user = optionalUser.get();
         Spot spot = getSpot(numberOfWheels, optionalParkingLot);
         if(spot==null){
-            return null;
+            throw new Exception("Cannot make reservation");
         }
         spot.setOccupied(Boolean.TRUE);
         Reservation reservation = new Reservation();
@@ -45,7 +45,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         spotRepository3.save(spot);
         userRepository3.save(user);
-        return reservationRepository3.save(reservation);
+        return reservation;
     }
 
     private static Spot getSpot(Integer numberOfWheels, Optional<ParkingLot> optionalParkingLot) {
@@ -55,9 +55,9 @@ public class ReservationServiceImpl implements ReservationService {
         Spot spot = null;
         for(Spot s: spotList){
             int wheels = 0;
-            if(s.getSpotType().equals(SpotType.TWO_WHEELER)){
+            if(s.getSpotType()==SpotType.TWO_WHEELER){
                 wheels=2;
-            }else if(s.getSpotType().equals(SpotType.FOUR_WHEELER)){
+            }else if(s.getSpotType()==SpotType.FOUR_WHEELER){
                 wheels=4;
             }else{
                 wheels = 1000;
