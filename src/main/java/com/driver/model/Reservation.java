@@ -22,6 +22,16 @@ public class Reservation {
 
     private int numberOfHours;
 
+    public Reservation(Integer id, int numberOfHours, int bill, User user, Spot spot, Payment payment) {
+        this.id = id;
+        this.numberOfHours = numberOfHours;
+        this.user = user;
+        this.spot = spot;
+        this.payment = payment;
+    }
+
+    public Reservation() {
+    }
     public int getId() {
         return id;
     }
