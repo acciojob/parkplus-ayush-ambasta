@@ -17,7 +17,7 @@ public class Spot {
 
     SpotType spotType;
     private Integer pricePerHour;
-    private Boolean occupied;
+    private Boolean occupied=false;
 
     public int getId() {
         return id;
