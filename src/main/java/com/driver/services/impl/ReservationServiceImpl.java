@@ -27,12 +27,12 @@ public class ReservationServiceImpl implements ReservationService {
         Optional<User> optionalUser = userRepository3.findById(userId);
         Optional<ParkingLot> optionalParkingLot = parkingLotRepository3.findById(parkingLotId);
         if(optionalUser.isEmpty() || optionalParkingLot.isEmpty()){
-            throw new Exception("Cannot make reservation");
+            return null;
         }
         User user = optionalUser.get();
         Spot spot = getSpot(numberOfWheels, optionalParkingLot);
         if(spot==null){
-            throw new Exception("Cannot make reservation");
+            return null;
         }
         spot.setOccupied(Boolean.TRUE);
         Reservation reservation = new Reservation();
